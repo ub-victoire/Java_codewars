@@ -1,0 +1,49 @@
+
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Find the project root (the directory containing this script).
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Check that a Java filename or class name was provided.
+if [ "$#" -ne 1 ]; then
+    echo "Usage: bash run <ClassName>"
+    exit 1
+fi
+
+CLASS_NAME="${1%.java}"
+
+# Find the Java source file.
+SOURCE_FILE="$(find "$ROOT_DIR/src/main/java" \
+    -type f -name "${CLASS_NAME}.java" -print -quit)"
+
+if [ -z "$SOURCE_FILE" ]; then
+    echo "Error: ${CLASS_NAME}.java was not found."
+    exit 1
+fi
+
+# Read the package declaration from the Java source.
+PACKAGE_NAME="$(sed -n 's/^package \(.*\);/\1/p' "$SOURCE_FILE" | head -n 1)"
+
+# Create the output directory.
+mkdir -p "$ROOT_DIR/out"
+
+echo "Compiling ${CLASS_NAME}..."
+
+# Compile the selected Java file into out/.
+javac --release 25 -d "$ROOT_DIR/out" "$SOURCE_FILE"
+
+# Determine the fully qualified class name.
+if [ -n "$PACKAGE_NAME" ]; then
+    MAIN_CLASS="${PACKAGE_NAME}.${CLASS_NAME}"
+else
+    MAIN_CLASS="$CLASS_NAME"
+fi
+
+echo
+echo "Running ${MAIN_CLASS}..."
+echo "--------------------------------"
+
+# Run the compiled Java class.
+java -cp "$ROOT_DIR/out" "$MAIN_CLASS"
