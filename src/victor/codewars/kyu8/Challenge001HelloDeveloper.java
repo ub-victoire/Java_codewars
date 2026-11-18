@@ -3,11 +3,11 @@
 *
 * Scenario:
 * You are developing a welcome system for a software
-* development bootcamp. Each new developer should
+* development Boot camp. Each new developer should
 * receive a personalize welcome message.
 *
 * Requirement:
-* Create a method that accepts a deveper's name
+* Create a method that accepts a developer's name
 * and return a welcome message
 */
 
@@ -20,7 +20,7 @@ public class Challenge001HelloDeveloper{
     }
 
     public static void main(String[] args){
-        String result = greetDeveloper("Victor");
+        String result = greetingDeveloper("Victor");
 
         System.out.println(result);
     }
