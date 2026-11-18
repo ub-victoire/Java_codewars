@@ -3,47 +3,54 @@
 
 set -euo pipefail
 
-# Find the project root (the directory containing this script).
+# Project root: directory containing this script.
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Check that a Java filename or class name was provided.
+# Require exactly one argument.
 if [ "$#" -ne 1 ]; then
-    echo "Usage: bash run <ClassName>"
+    echo "Usage: ./run <ClassName>"
     exit 1
 fi
 
 CLASS_NAME="${1%.java}"
+SOURCE_DIR="$ROOT_DIR/src"
+OUT_DIR="$ROOT_DIR/out"
 
-# Find the Java source file.
-SOURCE_FILE="$(find "$ROOT_DIR/src/main/java" \
-    -type f -name "${CLASS_NAME}.java" -print -quit)"
+# Find the requested Java source file.
+SOURCE_FILE="$(find "$SOURCE_DIR" \
+    -type f \
+    -name "${CLASS_NAME}.java" \
+    -print -quit)"
 
 if [ -z "$SOURCE_FILE" ]; then
-    echo "Error: ${CLASS_NAME}.java was not found."
+    echo "Error: ${CLASS_NAME}.java was not found in src/."
     exit 1
 fi
 
-# Read the package declaration from the Java source.
-PACKAGE_NAME="$(sed -n 's/^package \(.*\);/\1/p' "$SOURCE_FILE" | head -n 1)"
+# Read the Java package declaration.
+PACKAGE_NAME="$(sed -n 's/^package[[:space:]]\+\(.*\);/\1/p' \
+    "$SOURCE_FILE" | head -n 1)"
 
-# Create the output directory.
-mkdir -p "$ROOT_DIR/out"
+# Start with a clean compilation directory.
+rm -rf "$OUT_DIR"
+mkdir -p "$OUT_DIR"
 
-echo "Compiling ${CLASS_NAME}..."
+echo "========================================"
+echo "Compiling: $CLASS_NAME"
+echo "Source:    ${SOURCE_FILE#"$ROOT_DIR/"}"
+echo "========================================"
 
-# Compile the selected Java file into out/.
-javac --release 25 -d "$ROOT_DIR/out" "$SOURCE_FILE"
+javac --release 25 -d "$OUT_DIR" "$SOURCE_FILE"
 
 # Determine the fully qualified class name.
 if [ -n "$PACKAGE_NAME" ]; then
-    MAIN_CLASS="${PACKAGE_NAME}.${CLASS_NAME}"
+    MAIN_CLASS="$PACKAGE_NAME.$CLASS_NAME"
 else
     MAIN_CLASS="$CLASS_NAME"
 fi
 
 echo
-echo "Running ${MAIN_CLASS}..."
-echo "--------------------------------"
+echo "Running: $MAIN_CLASS"
+echo "----------------------------------------"
 
-# Run the compiled Java class.
-java -cp "$ROOT_DIR/out" "$MAIN_CLASS"
+java -cp "$OUT_DIR" "$MAIN_CLASS"

@@ -1,19 +1,9 @@
-
-# Maven
-target/
+# Compiled Java classes
+out/
 *.class
 
-# IDE
-.idea/
-.vscode/
-*.iml
+# Temporary editor files
+*~
 
-# Operating system
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
-
-# Temporary files
-*.tmp
+# Maven output
+target/
