@@ -10,7 +10,21 @@ input : 1234
 
 Binary: 10011010010
         1  11 1  1
-        
-  
-
 */
+
+
+public class BitCounting {
+    public static int countBits(int n){
+         String binary = Integer.toBinaryString(n);
+
+         int count = 0;
+
+         for (int i =0; i < binary.length(); i++){
+            if (binary.charAt(i) == '1'){
+                count++;
+            }
+         }
+         return count;
+    }
+
+}
