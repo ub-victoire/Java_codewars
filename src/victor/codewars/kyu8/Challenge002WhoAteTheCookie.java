@@ -1,10 +1,9 @@
-package victor.coderwars.kyu8;
+package victor.codewars.kyu8;
 
 import java.util.Objects;
 
-
 /**
- * Challenge 002 - Who ate the cookie?
+ * Challenge 001 - Who ate the cookie?
  * Level:    8 kyu
  * Tags:     Fundamentals
  * Codewars: https://www.codewars.com/kata/55a996e0e8520afab9000055
@@ -31,30 +30,46 @@ import java.util.Objects;
  *   x instanceof String   -> true when x is a text value
  *   if / else if / else   -> choose exactly one branch
  */
+public class Challenge002WhoAteTheCookie {
 
-public class Challenge002WhoAteCookie{
-    public static String whoAteTheCookie(Object x){
+    public static String whoAteTheCookie(Object x) {
         String name;
-        if(x instanceof String){
+        if (x instanceof String) {
             name = "Zach";
-        }else if (x instanceof Integer || x instanceof Double){
+        } else if (x instanceof Integer || x instanceof Double) {
             name = "Monica";
-        }else{
-            Return "Who ate the last cookie? It was " + name + "!"
+        } else {
+            name = "the dog";
         }
+        return "Who ate the last cookie? It was " + name + "!";
+    }
 
-        public static void main(String[] args){
-            check("test input", whoAteTheCookie("hi"), "Who ate the last cookie? It was Zach");
-            check("integer input", whoAteTheCookie(5), "Who ate the last cookie? It was Monica!");
-            check("double input", whoAteTheCookie(2.5), "Who ate the last cookie? It was Monica!");
-            check("boolean input", whoAteTheCookie(true), "Who ate the last cookie? It was the dog!"); 
-         }
-         private static void(String label, Object actual, Object expected){
-            if(Objects.equals(actual, expected)){
-                System.out.println("Pass "+ label);
-            }else{
-                System.out.println("Fail ")
-            }
-         } 
+    public static void main(String[] args) {
+        check("text input", whoAteTheCookie("hi"), "Who ate the last cookie? It was Zach!");
+        check("integer input", whoAteTheCookie(5), "Who ate the last cookie? It was Monica!");
+        check("double input", whoAteTheCookie(2.5), "Who ate the last cookie? It was Monica!");
+        check("boolean input", whoAteTheCookie(true), "Who ate the last cookie? It was the dog!");
+    }
+
+    private static void check(String label, Object actual, Object expected) {
+        if (Objects.equals(actual, expected)) {
+            System.out.println("PASS  " + label);
+        } else {
+            System.out.println("FAIL  " + label + ": got " + actual + ", expected " + expected);
+        }
     }
 }
+
+
+/**
+Explaination of some key concept
+
+public static String whoAteTheCookie(Object x)
+
+- Object = the dat type
+x = the variable name that stores the value passed into the method
+
+and x can receive different types of objects 
+
+
+**/
