@@ -27,7 +27,7 @@
  *   if / else if / else   -> choose exactly one branch
  */
 
-public class WhoAteTheCookie{
+public class Challenge001WhoAteTheCookie{
     public static String cookie(Object x){
         if (x instanceof String){
             return "Who ate the last cookie? It was Zach!";
@@ -39,7 +39,7 @@ public class WhoAteTheCookie{
     }
 
     public static void main(String[] args){
-        WhoAteTheCookie eat = WhoAteTheCookie();
+        Challenge001WhoAteTheCookie eat = Challenge001WhoAteTheCookie();
         eat.cookie(2);
         eat.cookie(2.2);
         eat.cookie("me");
