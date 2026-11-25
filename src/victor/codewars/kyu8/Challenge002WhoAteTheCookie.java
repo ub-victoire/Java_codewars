@@ -69,7 +69,12 @@ public static String whoAteTheCookie(Object x)
 - Object = the dat type
 x = the variable name that stores the value passed into the method
 
-and x can receive different types of objects 
+and x can receive different types of objects
+
+Java determine the value accordingly
+
+- instanceof?
+is 
 
 
 **/
