@@ -39,7 +39,7 @@ public class Challenge001WhoAteTheCookie{
     }
 
     public static void main(String[] args){
-        Challenge001WhoAteTheCookie eat = Challenge001WhoAteTheCookie();
+        Challenge001WhoAteTheCookie eat = new Challenge001WhoAteTheCookie();
         eat.cookie(2);
         eat.cookie(2.2);
         eat.cookie("me");
