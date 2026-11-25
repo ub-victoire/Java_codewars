@@ -74,7 +74,13 @@ and x can receive different types of objects
 Java determine the value accordingly
 
 - instanceof?
-is 
+is a Java operator that checks the type of object
+
+String name = "Victor";
+
+System.out.println(name instanceof String) // true
+
+- Check()? is simply another method that plays the job of testing whether your answer is correct 
 
 
 **/
