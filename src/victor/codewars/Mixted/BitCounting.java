@@ -27,4 +27,9 @@ public class BitCounting {
          return count;
     }
 
+    public static void main(String[] args){
+        BitCounting  count = new BitCounting();
+        System.out.println(count.countBits);
+    }
+
 }
