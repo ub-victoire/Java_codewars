@@ -43,6 +43,7 @@ public class Challenge001WhoAteTheCookie{
         System.out.println(eat.cookie(2));
         System.out.println(eat.cookie(2.2));
         System.out.println(eat.cookie("me"));
+        System.out.println(eat.cookie(true));
     }
 }
 
