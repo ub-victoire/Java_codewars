@@ -27,7 +27,7 @@ public class findEvenIndex {
 
     public static void main (String[] args){
         findEvenIndex index = new findEvenIndex();
-        System.out.println(index.findIndex(new int[]{1,2,3,2,0}));
+        System.out.println(index.findIndex(new int[]{1,2,3,2,1,0}));
     }
 
 }
