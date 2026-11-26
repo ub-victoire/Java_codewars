@@ -7,3 +7,35 @@ This is O(n) time and O(1) extra space.
 
 */
 
+public class findEvenIndex {
+    public static int findIndex(int[] arr){
+        int total = 0;
+        for(int num : arr){
+            total +=num
+        }
+
+        int left = 0;
+        for(int i = 0; i<arr.length(); i++){
+            int right = total - left -arr[i];
+            if(left === right){
+                return arr[i]
+            }
+            left += arr[i]; 
+        }
+        return -1;
+    }
+
+    public static void main (String[] args){
+        findEvenIndex index = new findEvenIndex;
+        System.out.println([1,2,3,2,1]);
+    }
+
+}
+
+/*
+int Total = 1+2+3+2+1= 9
+0 R= 9-0-1= 8;  L= 0  not equal L+arr[0](1) = 1
+1 R= 9-1-2= 6;  L= 1  not equal L+arr[1](2) = 3
+2 R= 9-3-3= 3;  L= 3  equal  retrieve arr[2] = 3
+
+*/
