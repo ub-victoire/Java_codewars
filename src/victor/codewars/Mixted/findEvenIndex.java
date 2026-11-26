@@ -11,14 +11,14 @@ public class findEvenIndex {
     public static int findIndex(int[] arr){
         int total = 0;
         for(int num : arr){
-            total +=num
+            total +=num;
         }
 
         int left = 0;
         for(int i = 0; i<arr.length(); i++){
             int right = total - left -arr[i];
-            if(left === right){
-                return arr[i]
+            if(left.equals(right)){
+                return arr[i];
             }
             left += arr[i]; 
         }
@@ -27,7 +27,7 @@ public class findEvenIndex {
 
     public static void main (String[] args){
         findEvenIndex index = new findEvenIndex;
-        System.out.println([1,2,3,2,1]);
+        System.out.println(index.findIndex([1,2,3,2,1]));
     }
 
 }
